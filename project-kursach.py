@@ -22,13 +22,14 @@ def index():
 
     # Создание графика столбцов
     month_counts = data['Month'].value_counts()
-    column_chart = month_counts.plot(kind='bar', color=sns.color_palette())
-    plt.xlabel('Месяц')
-    plt.ylabel('Количество')
-    plt.title('Количество посещений в разные месяцы')
+    fig, ax = plt.subplots()
+    sns.barplot(x=month_counts.index, y=month_counts.values, ax=ax)
+    ax.set_xlabel('Месяц')
+    ax.set_ylabel('Количество')
+    ax.set_title('Количество посещений в разные месяцы')
 
     # Преобразование графика столбцов в интерактивный формат
-    column_chart_html = mpld3.fig_to_html(column_chart.figure)
+    column_chart_html = mpld3.fig_to_html(fig)
 
     # Преобразование данных в HTML-таблицу
     table_html = data.head().to_html()
