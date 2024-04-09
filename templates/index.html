@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Графики</title>
+    <title>Результаты модели машинного обучения</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-    <h1>Графики</h1>
-    <h2>График столбцов</h2>
-    {{ column_chart_html|safe }}
-    <h2>Круговая диаграмма</h2>
-    {{ pie_chart_html|safe }}
-    <h2>Таблица</h2>
-    {{ table|safe }}
+    <h1>Результаты модели машинного обучения</h1>
+    
+    <h2>Графики</h2>
+    <div id="graph"></div>
+    
+    <script>
+        // Вставка HTML-кода графика в элемент с id "graph"
+        document.getElementById('graph').innerHTML = '{{ graph|safe }}';
+    </script>
 </body>
 </html>
