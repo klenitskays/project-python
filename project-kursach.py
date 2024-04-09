@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    # Загрузка данных
+    # ЗАГРУЗКА ДАННЫХ
     data = pd.read_csv('online_shoppers_intention.csv')
 
     # Создание круговой диаграммы
