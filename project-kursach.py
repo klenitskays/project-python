@@ -1,32 +1,26 @@
 from flask import Flask, render_template
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-import mpld3
+from sklearn.linear_model import LogisticRegression
+import plotly.graph_objs as go
+from plotly.subplots import make_subplots
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    # ЗАГРУЗКА ДАННЫХ
+    # Загрузка данных
     data = pd.read_csv('online_shoppers_intention.csv')
 
-    # Создание круговой диаграммы
-    revenue_counts = data['Revenue'].value_counts()
-    pie_chart = revenue_counts.plot(kind='pie', colors=sns.color_palette(), autopct='%1.1f%%')
-    plt.axis('equal')
-    plt.title('Доля совершенных покупок')
+    # Выделение признаков и целевой переменной
+    X = data[['Administrative', 'Informational']]
+    y = data['Revenue']
 
-    # Преобразование круговой диаграммы в интерактивный формат
-    pie_chart_html = mpld3.fig_to_html(pie_chart.figure)
+    # Обучение модели логистической регрессии
+    model = LogisticRegression()
+    model.fit(X, y)
 
-    # Создание графика столбцов
-    month_counts = data['Month'].value_counts()
-    fig, ax = plt.subplots()
-    sns.barplot(x=month_counts.index, y=month_counts.values, ax=ax)
-    ax.set_xlabel('Месяц')
-    ax.set_ylabel('Количество')
-    ax.set_title('Количество посещений в разные месяцы')
+    # Вычисление предсказаний модели
+    predictions = model.predict(X)
 
     # Создание розового графика
     pink_line = [5, 10, 8, 3, 6, 9, 4]
@@ -38,11 +32,23 @@ def index():
     # Преобразование графика столбцов и розового графика в интерактивный формат
     column_chart_html = mpld3.fig_to_html(fig)
 
-    # Преобразование данных в HTML-таблицу
-    table_html = data.head().to_html()
+    # Создание графика
+    fig = make_subplots(rows=2, cols=1, subplot_titles=['Revenue', 'Prediction'])
+
+    # График для реальных значений
+    fig.add_trace(go.Scatter(x=data.index, y=data['Revenue'], mode='markers', name='Revenue'), row=1, col=1)
+
+    # График для предсказаний
+    fig.add_trace(go.Scatter(x=data.index, y=data['Prediction'], mode='markers', name='Prediction'), row=2, col=1)
+
+    # Настройка макета графика
+    fig.update_layout(height=600, width=800, showlegend=False)
+
+    # Получение HTML-кода для встроенного графика
+    graph_html = fig.to_html(full_html=False)
 
     # Отображение результатов на веб-странице
-    return render_template('index.html', table=table_html, column_chart_html=column_chart_html, pie_chart_html=pie_chart_html)
+    return render_template('index.html', graph=graph_html)
 
 if __name__ == '__main__':
     app.run()
