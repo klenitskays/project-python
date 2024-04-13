@@ -1,15 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Графики</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        .chart-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .chart {
+            width: 45%;
+        }
+        .table-container {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Графики</h1>
-    <h2>График столбцов</h2>
-    {{ column_chart_html|safe }}
-    <h2>Круговая диаграмма</h2>
-    {{ pie_chart_html|safe }}
-    <h2>Таблица</h2>
-    {{ table|safe }}
+    <div class="chart-container">
+        <div class="chart">
+            {{ pie_chart_html | safe }}
+        </div>
+        <div class="chart">
+            {{ column_chart_html | safe }}
+        </div>
+    </div>
+    <div class="chart-container">
+        <div class="chart">
+            <!-- Add the pink line plot here -->
+            <h2>Розовый график</h2>
+            <div id="pink-line-plot"></div>
+        </div>
+    </div>
+    <div class="table-container">
+        <h2>Таблица данных</h2>
+        {{ table | safe }}
+    </div>
+    <script>
+        // JavaScript code to render the pink line plot using Plotly
+        var pinkLineData = [{
+            x: [0, 1, 2, 3, 4, 5, 6],
+            y: [5, 10, 8, 3, 6, 9, 4],
+            mode: 'lines',
+            line: {
+                color: 'pink'
+            }
+        }];
+
+        var pinkLineLayout = {
+            title: 'Розовый график',
+            xaxis: {
+                title: 'X'
+            },
+            yaxis: {
+                title: 'Y'
+            }
+        };
+
+        Plotly.newPlot('pink-line-plot', pinkLineData, pinkLineLayout);
+    </script>
 </body>
 </html>
