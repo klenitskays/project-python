@@ -14,7 +14,7 @@
                     <a href="#hero">
                         <h1><span>T</span>rand <span>M</span>aster</h1>
                     </a>
-                </div>
+               </div>
                 <div class="nav-list">
                     <div class="hamburger">
                         <div class="bar"></div>
@@ -50,10 +50,14 @@
                 <!-- Вставка сгенерированного HTML для круговой диаграммы -->
                 {{ pie_plot_div | safe }}
             </div>
-			<div class="chart-container">
-				<!-- Вставка сгенерированного HTML для линейной диаграммы -->
-				{{ line_plot_div | safe }}
-			</div>
+            <div class="chart-container">
+                <!-- Вставка сгенерированного HTML для линейной диаграммы -->
+                {{ line_plot_div | safe }}
+            </div>
+            <div class="chart-container">
+                <!-- Вставка сгенерированного HTML для точечной диаграммы -->
+                {{ scatter_plot_div | safe }}
+            </div>
         </div>
     </section>
     <!-- End Hero Section -->
