@@ -43,8 +43,12 @@
     <section id="hero">
         <div class="hero container">
             <div class="chart-container">
-                <!-- Вставка сгенерированного HTML для диаграммы -->
-                {{ plot_div | safe }}
+                <!-- Вставка сгенерированного HTML для столбчатой диаграммы -->
+                {{ bar_plot_div | safe }}
+            </div>
+            <div class="chart-container">
+                <!-- Вставка сгенерированного HTML для круговой диаграммы -->
+                {{ pie_plot_div | safe }}
             </div>
         </div>
     </section>

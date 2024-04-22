@@ -23,13 +23,28 @@ def index():
         yaxis=dict(title='Количество')
     )
 
-    fig = go.Figure(data=[bar_data], layout=bar_layout)
+    bar_fig = go.Figure(data=[bar_data], layout=bar_layout)
 
-    # Преобразование диаграммы в HTML
-    plot_div = plot(fig, output_type='div')
+    # Преобразование столбчатой диаграммы в HTML
+    bar_plot_div = plot(bar_fig, output_type='div')
+
+    # Подсчет соотношения различных типов посетителей
+    visitor_types = data['VisitorType'].value_counts()
+
+    # Создание круговой диаграммы с использованием Plotly
+    pie_data = go.Pie(labels=visitor_types.index, values=visitor_types.values)
+
+    pie_layout = go.Layout(
+        title='Круговая диаграмма по типу посетителя',
+    )
+
+    pie_fig = go.Figure(data=[pie_data], layout=pie_layout)
+
+    # Преобразование круговой диаграммы в HTML
+    pie_plot_div = plot(pie_fig, output_type='div')
 
     # Отображение результатов на веб-странице и передача данных
-    return render_template('index.html', plot_div=plot_div, data=data.to_csv(index=False))
+    return render_template('index.html', bar_plot_div=bar_plot_div, pie_plot_div=pie_plot_div)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000, threaded=True)
