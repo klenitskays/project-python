@@ -58,6 +58,10 @@
                 <!-- Вставка сгенерированного HTML для точечной диаграммы -->
                 {{ scatter_plot_div | safe }}
             </div>
+			<div class="chart-container">
+				<!-- Вставка сгенерированного HTML для круговой диаграммы по выручке -->
+				{{ pie_plot_div_revenue | safe }}
+			</div>
         </div>
     </section>
     <!-- End Hero Section -->

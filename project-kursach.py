@@ -55,17 +55,32 @@ def index():
 
     # Создание данных для точечной диаграммы
     bounce_exit_data = data[['BounceRates', 'ExitRates']]
-    
+
     # Создание точечной диаграммы с использованием Plotly
     scatter_data = go.Scatter(x=bounce_exit_data['BounceRates'], y=bounce_exit_data['ExitRates'], mode='markers')
     scatter_layout = go.Layout(title='Scatter Plot: Bounce Rates vs. Exit Rates', xaxis=dict(title='Bounce Rates'), yaxis=dict(title='Exit Rates'))
     scatter_fig = go.Figure(data=[scatter_data], layout=scatter_layout)
-    
+
     # Преобразование точечной диаграммы в HTML
     scatter_plot_div = plot(scatter_fig, output_type='div')
 
+    # Подсчет соотношения выручки и не выручки
+    revenue_counts = data['Revenue'].value_counts()
+
+    # Создание круговой диаграммы для выручки
+    pie_data_revenue = go.Pie(labels=revenue_counts.index, values=revenue_counts.values)
+
+    pie_layout_revenue = go.Layout(title='Круговая диаграмма по выручке')
+
+    pie_fig_revenue = go.Figure(data=[pie_data_revenue], layout=pie_layout_revenue)
+
+    # Преобразование круговой диаграммы в HTML
+    pie_plot_div_revenue = plot(pie_fig_revenue, output_type='div')
+
     # Отображение результатов на веб-странице и передача данных
-    return render_template('index.html', bar_plot_div=bar_plot_div, pie_plot_div=pie_plot_div, line_plot_div=line_plot_div, scatter_plot_div=scatter_plot_div)
+    return render_template('index.html', bar_plot_div=bar_plot_div, pie_plot_div=pie_plot_div,
+                           line_plot_div=line_plot_div, scatter_plot_div=scatter_plot_div,
+                           pie_plot_div_revenue=pie_plot_div_revenue)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000, threaded=True)
