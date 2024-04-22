@@ -2,6 +2,7 @@ from flask import Flask, render_template
 import pandas as pd
 import plotly.graph_objects as go
 from plotly.offline import plot
+import plotly.express as px
 
 app = Flask(__name__)
 app.static_folder = 'static'
@@ -43,8 +44,17 @@ def index():
     # Преобразование круговой диаграммы в HTML
     pie_plot_div = plot(pie_fig, output_type='div')
 
+    # Подсчет количества посетителей или продуктовых запросов по типам трафика
+    traffic_data = data.groupby('TrafficType').size()
+
+    # Создание линейной диаграммы с использованием Plotly Express
+    line_fig = px.line(traffic_data, x=traffic_data.index, y=traffic_data.values)
+
+    # Преобразование линейной диаграммы в HTML
+    line_plot_div = plot(line_fig, output_type='div')
+
     # Отображение результатов на веб-странице и передача данных
-    return render_template('index.html', bar_plot_div=bar_plot_div, pie_plot_div=pie_plot_div)
+    return render_template('index.html', bar_plot_div=bar_plot_div, pie_plot_div=pie_plot_div, line_plot_div=line_plot_div)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000, threaded=True)
