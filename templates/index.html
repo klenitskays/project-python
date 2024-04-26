@@ -43,28 +43,50 @@
     <section id="hero">
         <div class="hero container">
             <div class="chart-container">
-                <!-- Вставка сгенерированного HTML для столбчатой диаграммы -->
-                {{ bar_plot_div | safe }}
+                <div class="chart">
+                    <!-- Вставка сгенерированного HTML для столбчатой диаграммы -->
+                    {{ bar_plot_div | safe }}
+                </div>
+                <p class="chart-text">Текст для столбчатой диаграммы</p>
             </div>
             <div class="chart-container">
-                <!-- Вставка сгенерированного HTML для круговой диаграммы -->
-                {{ pie_plot_div | safe }}
+                <div class="chart">
+                    <!-- Вставка сгенерированного HTML для круговой диаграммы -->
+                    {{ pie_plot_div | safe }}
+                </div>
+                <p class="chart-text">Текст для круговой диаграммы</p>
             </div>
             <div class="chart-container">
-                <!-- Вставка сгенерированного HTML для линейной диаграммы -->
-                {{ line_plot_div | safe }}
+                <div class="chart">
+                    <!-- Вставка сгенерированного HTML для линейной диаграммы -->
+                    {{ line_plot_div | safe }}
+                </div>
+                <p class="chart-text">Текст для линейной диаграммы</p>
             </div>
             <div class="chart-container">
-                <!-- Вставка сгенерированного HTML для точечной диаграммы -->
-                {{ scatter_plot_div | safe }}
+                <div class="chart">
+                    <!-- Вставка сгенерированного HTML для точечной диаграммы -->
+                    {{ scatter_plot_div | safe }}
+                </div>
+                <p class="chart-text">Текст для точечной диаграммы</p>
             </div>
-			<div class="chart-container">
-				<!-- Вставка сгенерированного HTML для круговой диаграммы по выручке -->
-				{{ pie_plot_div_revenue | safe }}
-			</div>
+            <div class="chart-container">
+                <div class="chart">
+                    <!-- Вставка сгенерированного HTML для круговой диаграммы по выручке -->
+                    {{ pie_plot_div_revenue | safe }}
+                </div>
+                <p class="chart-text">Текст для круговой диаграммы по выручке</p>
+            </div>
         </div>
     </section>
     <!-- End Hero Section -->
-
+  
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer container">
+            <!-- Код для подвала сайта -->
+        </div>
+    </footer>
+    <!-- End Footer -->
 </body>
 </html>
