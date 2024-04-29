@@ -1,13 +1,34 @@
-from flask import Flask, render_template
+
+# from flask import Flask, render_template, redirect, url_for
+# import pandas as pd
+# import plotly.graph_objects as go
+# from plotly.offline import plot
+# import plotly.express as px
+
+
+# app = Flask(__name__)
+
+# @app.route('/')
+# def index():
+#     return render_template('indexglavn.html')
+
+# if __name__ == '__main__':
+#     app.run(debug=True, port=8000, threaded=True)
+
+
+from flask import Flask, render_template, url_for, redirect
 import pandas as pd
 import plotly.graph_objects as go
 from plotly.offline import plot
 import plotly.express as px
 
 app = Flask(__name__)
-app.static_folder = 'static'
 
 @app.route('/')
+def indexglavn():
+    return render_template('indexglavn.html')
+
+@app.route('/index')
 def index():
     # Загрузка данных
     data = pd.read_csv('online_shoppers_intention.csv')
@@ -82,5 +103,7 @@ def index():
                            line_plot_div=line_plot_div, scatter_plot_div=scatter_plot_div,
                            pie_plot_div_revenue=pie_plot_div_revenue)
 
+   # return render_template('index.html') 
+
 if __name__ == '__main__':
-    app.run(debug=True, port=8000, threaded=True)
+    app.run(debug=True)
