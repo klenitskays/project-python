@@ -1,21 +1,3 @@
-
-# from flask import Flask, render_template, redirect, url_for
-# import pandas as pd
-# import plotly.graph_objects as go
-# from plotly.offline import plot
-# import plotly.express as px
-
-
-# app = Flask(__name__)
-
-# @app.route('/')
-# def index():
-#     return render_template('indexglavn.html')
-
-# if __name__ == '__main__':
-#     app.run(debug=True, port=8000, threaded=True)
-
-
 from flask import Flask, render_template, url_for, redirect
 import pandas as pd
 import plotly.graph_objects as go
@@ -97,13 +79,25 @@ def index():
 
     # Преобразование круговой диаграммы в HTML
     pie_plot_div_revenue = plot(pie_fig_revenue, output_type='div')
+    data = pd.read_csv('online_shoppers_intention.csv')
 
+    # Анализ датасета
+    # Размерность датасета
+    dataset_shape = data.shape
+
+    # Просмотр среза данных
+    dataset_head = data.head()
+
+    # Статистическая сводка атрибутов
+    dataset_description = data.describe()
+
+    # Разбивка данных по атрибуту класса
+    class_distribution = data['Revenue'].value_counts()
     # Отображение результатов на веб-странице и передача данных
     return render_template('index.html', bar_plot_div=bar_plot_div, pie_plot_div=pie_plot_div,
                            line_plot_div=line_plot_div, scatter_plot_div=scatter_plot_div,
-                           pie_plot_div_revenue=pie_plot_div_revenue)
-
-   # return render_template('index.html') 
+                           pie_plot_div_revenue=pie_plot_div_revenue, dataset_shape=dataset_shape, dataset_head=dataset_head,
+                           dataset_description=dataset_description, class_distribution=class_distribution)
 
 if __name__ == '__main__':
     app.run(debug=True)
