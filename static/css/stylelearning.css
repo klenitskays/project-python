@@ -36,7 +36,7 @@ img {
 	object-fit: cover;
 }
 p {
-	color: black;
+	color: white;
 	font-size: 1.4rem;
 	margin-top: 5px;
 	line-height: 2.5rem;
@@ -46,7 +46,7 @@ p {
 .section-title {
 	font-size: 4rem;
 	font-weight: 300;
-	color: black;
+	color: white;
 	margin-bottom: 10px;
 	text-transform: uppercase;
 	letter-spacing: 0.2rem;
@@ -213,71 +213,6 @@ p {
 #header .hamburger.active .bar::after {
 	top: 0;
 }
-/* Обновленный CSS для диаграмм */
-
-/* Стили для текста диаграмм */
-.chart-text {
-	color: black; /* Черный цвет текста */
-	font-size: 1.6rem;
-	font-weight: 300;
-	letter-spacing: 0.05rem;
-	line-height: 2.5rem;
-	 font-family: 'Montserrat', sans-serif; /* Использование шрифта Montserrat */
-	}
-	
-	/* Стили для контейнера диаграмм */
-	.chart-container {
-		margin-top: 50px;
-		text-align: center;
-		background-color: rgba(240, 248, 255, 0.021); /* Цвет фона для квадрата */
-		padding: 20px; /* Отступы внутри квадрата */
-		border-radius: 10px; /* Скругление углов для квадрата */
-	}
-	/* Стили для столбцов столбчатой диаграммы */
-	.diagram-bars {
-	background-color: crimson; /* Красный цвет для столбцов */
-	}
-	
-	.diagram-bars:hover {
-	background-color: white; /* Белый цвет при наведении */
-	}
-	
-	/* Стили для текста на столбцах столбчатой диаграммы */
-	.diagram-bars-text {
-	color: crimson; /* Красный цвет для текста на столбцах */
-	}
-	
-	/* Стили для круговых диаграмм */
-	.pie-chart {
-	color: white; /* Белый цвет для круговой диаграммы */
-	}
-	
-	/* Стили для точечных диаграмм */
-	.scatter-chart {
-	color: crimson; /* Красный цвет для точечной диаграммы */
-	}
-	
-	/* Стили для линейных диаграмм */
-	.line-chart {
-	color: crimson; /* Красный цвет для линейной диаграммы */
-	}
-	/* Стили для контейнера */
-#hero .container {
-    /* Отображаем дочерние элементы как flex-элементы */
-    display: flex;
-    /* Выравниваем дочерние элементы по центру по горизонтали */
-    justify-content: center;
-    /* Выравниваем дочерние элементы по центру по вертикали */
-    align-items: center;
-    /* Разрешаем дочерним элементам переноситься на новую строку */
-    flex-wrap: wrap;
-    /* Ограничиваем максимальную ширину до 1500 пикселей */
-    max-width: 1500px;
-    /* Выравниваем по центру по горизонтали */
-    margin: 0 auto;
-    /* Добавляем верхний и нижний отступы в 100 пикселей */
-    padding: 100px 0;
-}
 
 /* Стили для блока с диаграммами */
 #hero .chart-container {
@@ -359,12 +294,19 @@ p {
 /* Стили для текста */
 #hero .chart-container .chart-text {
     /* Устанавливаем цвет текста */
-    color: white;
+    color: white; /* Белый цвет текста */
     /* Выравниваем текст по центру */
     text-align: center;
     /* Задаем размер шрифта */
     font-size: 1.8rem;
     /* Добавляем отступ сверху */
     margin-top: 20px;
+    /* Задаем шрифт */
+    font-family: 'Montserrat', sans-serif; /* Использование шрифта Montserrat */
+    /* Устанавливаем толщину шрифта */
+    font-weight: 300;
+    /* Задаем расстояние между буквами */
+    letter-spacing: 0.05rem;
+    /* Задаем высоту строки */
+    line-height: 2.5rem;
 }
-/* End Hero Section */

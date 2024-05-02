@@ -10,6 +10,62 @@ app = Flask(__name__)
 def indexglavn():
     return render_template('indexglavn.html')
 
+@app.route('/indexlearning')
+def indexlearning():
+    # Загрузка данных
+    data = pd.read_csv('online_shoppers_intention.csv')
+
+    # Анализ датасета
+    # Размерность датасета
+    dataset_shape = data.shape
+
+    # Просмотр среза данных
+    dataset_head = data.head()
+
+    # Статистическая сводка атрибутов
+    dataset_description = data.describe()
+
+    # Разбивка данных по атрибуту класса
+    class_distribution = data['Revenue'].value_counts()
+
+    # Распределение по атрибуту Revenue
+    revenue_distribution = data['Revenue'].value_counts()
+
+    # Отображение результатов на веб-странице и передача данных
+    return render_template('indexlearning.html', dataset_shape=dataset_shape, dataset_head=dataset_head,
+                           dataset_description=dataset_description, class_distribution=class_distribution,
+                           revenue_distribution=revenue_distribution)
+
+@app.route('/indexmonitoring')
+def indexmonitoring():
+    # Загрузка данных
+    data = pd.read_csv('online_shoppers_intention.csv')
+
+    # Подсчет количества визитов или продуктовых запросов по месяцам
+    monthly_data = data.groupby('Month').size()
+
+    # Создание столбчатой диаграммы с использованием Plotly
+    bar_data = go.Bar(x=monthly_data.index, y=monthly_data.values)
+
+    bar_layout = go.Layout(
+        title='Столбчатая диаграмма по месяцам',
+        xaxis=dict(title='Месяц'),
+        yaxis=dict(title='Количество')
+    )
+
+    bar_fig = go.Figure(data=[bar_data], layout=bar_layout)
+
+    # Преобразование столбчатой диаграммы в HTML
+    bar_plot_div = plot(bar_fig, output_type='div')
+
+    # Подсчет распределения выручки
+    revenue_distribution = data['Revenue'].value_counts()
+
+    # Отображение результатов на веб-странице и передача данных
+    return render_template('indexmonitoring.html', bar_plot_div=bar_plot_div, revenue_distribution=revenue_distribution)
+
+
+
 @app.route('/index')
 def index():
     # Загрузка данных
@@ -79,25 +135,11 @@ def index():
 
     # Преобразование круговой диаграммы в HTML
     pie_plot_div_revenue = plot(pie_fig_revenue, output_type='div')
-    data = pd.read_csv('online_shoppers_intention.csv')
 
-    # Анализ датасета
-    # Размерность датасета
-    dataset_shape = data.shape
-
-    # Просмотр среза данных
-    dataset_head = data.head()
-
-    # Статистическая сводка атрибутов
-    dataset_description = data.describe()
-
-    # Разбивка данных по атрибуту класса
-    class_distribution = data['Revenue'].value_counts()
     # Отображение результатов на веб-странице и передача данных
     return render_template('index.html', bar_plot_div=bar_plot_div, pie_plot_div=pie_plot_div,
                            line_plot_div=line_plot_div, scatter_plot_div=scatter_plot_div,
-                           pie_plot_div_revenue=pie_plot_div_revenue, dataset_shape=dataset_shape, dataset_head=dataset_head,
-                           dataset_description=dataset_description, class_distribution=class_distribution)
+                           pie_plot_div_revenue=pie_plot_div_revenue)
 
 if __name__ == '__main__':
     app.run(debug=True)

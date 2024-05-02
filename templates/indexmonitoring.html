@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Графики</title>
+
+
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <body>
+    <!-- Header -->
+    <section id="header">
+        <div class="header containerhead">
+            <div class="nav-bar">
+                <div class="brand">
+                    <a href="#hero">
+                        <h1><span>T</span>rand <span>M</span>aster</h1>
+                    </a>
+               </div>
+                <div class="nav-list">
+                    <div class="hamburger">
+                        <div class="bar"></div>
+                    </div>
+                    <ul>
+                        <li><a href="#hero" data-after="Home">на главную страницу</a></li>
+                        <li><a href="#services" data-after="Service">О чем наш проект</a></li>
+                        <li><a href="#projects" data-after="Projects">Анализ данных</a></li>
+                        <li><a href="#about" data-after="About">О создателях</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Header -->
+   
+    <!-- Section name -->
+    <section id="names">
+        <div class="names container">
+            <h1 class="section-title">М<span>онито</span>ринг</h1>
+        </div>
+    </section>
+    <!-- End section name -->
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero container">
+            <div class="chart-container">
+                <div class="chart-container">
+                    <div class="service-item::data-after">
+                        <!-- Вставка сгенерированного HTML для столбчатой диаграммы -->
+                        {{ bar_plot_div | safe }}
+                    </div>
+                    <p class="chart-text">Текст для столбчатой диаграммыТекст для столбчатой диаграммыТекст для столбчатой диаграммыТекст для столбчатой диаграммыТекст для столбчатой диаграммыТекст для столбчатой диаграммыТекст для столбчатой диаграммыТекст для столбчатой диаграммыТекст для столбчатой диаграммыТекст для столбчатой диаграммыТекст для столбчатой диаграммыТекст для столбчатой диаграммыТекст для столбчатой диаграммыТекст для столбчатой диаграммыТекст для столбчатой диаграммыТекст для столбчатой диаграммы</p>
+                </div>
+    <!-- <p>Давайте теперь рассмотрим количество экземпляров (строк), в зависимости от наличия или отсутствия выручки.</p>
+    <pre>
+# Распределение по атрибуту Revenue
+print(dataset['Revenue'].value_counts())
+    </pre>
+    <p>Мы видим, что:</p>
+    <ul>
+        <li>Выручка получена в {{ revenue_distribution[1] }} случаях.</li>
+        <li>Нет выручки в {{ revenue_distribution[0] }} случаях.</li>
+    </ul> -->
+
+
+<!-- <a href="#" class="cta">Learn More</a>  -->
+ </div>
+
+ <!-- End hero section -->
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer container">
+            <!-- Код для подвала сайта -->
+        </div>
+    </footer>
+    <!-- End Footer -->
+</body>
+</html>

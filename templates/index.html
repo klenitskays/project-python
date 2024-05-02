@@ -6,11 +6,11 @@
 
 
 
-    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"> -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <body>
     <!-- Header -->
     <section id="header">
-        <div class="header container">
+        <div class="header containerhead">
             <div class="nav-bar">
                 <div class="brand">
                     <a href="#hero">
@@ -32,7 +32,12 @@
         </div>
     </section>
     <!-- End Header -->
-    <h1>Анализ датасета</h1>
+    <!-- <section class="container">
+        <h1 class="brand">
+          Logo<span>.</span>
+        </h1>
+        <h2 class="section-title">Анализ датасета<span>.</span></h2>
+    <p>
     <p>Размерность датасета: {{ dataset_shape }}</p>
     <h2>Просмотр среза данных</h2>
     <pre>{{ dataset_head }}</pre>
@@ -40,6 +45,10 @@
     <pre>{{ dataset_description }}</pre>
     <h2>Разбивка данных по атрибуту класса</h2>
     <p>{{ class_distribution }}</p>
+
+</p>
+<a href="#" class="cta">Learn More</a>
+</section> -->
     <!-- Section name -->
     <section id="names">
         <div class="names container">
@@ -52,7 +61,7 @@
     <section id="hero">
         <div class="hero container">
             <div class="chart-container">
-                <div class="chart">
+                <div class="service-item::data-after">
                     <!-- Вставка сгенерированного HTML для столбчатой диаграммы -->
                     {{ bar_plot_div | safe }}
                 </div>
@@ -88,8 +97,7 @@
             </div>
         </div>
     </section>
-    <!-- End Hero Section -->
-  
+ <!-- End hero name -->
     <!-- Footer -->
     <footer id="footer">
         <div class="footer container">
