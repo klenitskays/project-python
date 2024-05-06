@@ -1,8 +1,30 @@
 from flask import Flask, render_template, url_for, redirect
 import pandas as pd
+import numpy as np
 import plotly.graph_objects as go
 from plotly.offline import plot
 import plotly.express as px
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import OneHotEncoder
+
+app = Flask(__name__)
+
+@app.route('/')
+def indexglavn():
+    return render_template('indexglavn.html')
+
+from flask import Flask, render_template, url_for, redirect
+import pandas as pd
+import numpy as np
+import plotly.graph_objects as go
+from plotly.offline import plot
+import plotly.express as px
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression  # Изменили импорт
+from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import OneHotEncoder
 
 app = Flask(__name__)
 
@@ -12,29 +34,82 @@ def indexglavn():
 
 @app.route('/indexlearning')
 def indexlearning():
-    # Загрузка данных
-    data = pd.read_csv('online_shoppers_intention.csv')
+    try:
+        # Загрузка данных
+        data = pd.read_csv('online_shoppers_intention.csv')
 
-    # Анализ датасета
-    # Размерность датасета
-    dataset_shape = data.shape
+        # Вывод информации о данных
+        print("Data information:")
+        print(data.info())
+        print("\nData description:")
+        print(data.describe())
 
-    # Просмотр среза данных
-    dataset_head = data.head()
+        # Интерполяция пропущенных значений только для признаков
+        data.interpolate(inplace=True)
 
-    # Статистическая сводка атрибутов
-    dataset_description = data.describe()
+        # Замена пропущенных значений в целевой переменной y
+        data['Revenue'].fillna(1, inplace=True)
+        # Преобразование текстовых значений в числа для целевой переменной 'Revenue'
+        data['Revenue'] = data['Revenue'].map({'TRUE': 1, 'FALSE': 0})
 
-    # Разбивка данных по атрибуту класса
-    class_distribution = data['Revenue'].value_counts()
+        # Кодирование категориальных признаков 'Month' и 'VisitorType'
+        encoder = OneHotEncoder(drop='first', sparse_output=False)
 
-    # Распределение по атрибуту Revenue
-    revenue_distribution = data['Revenue'].value_counts()
+        encoded_features = encoder.fit_transform(data[['Month', 'VisitorType']])
+        encoded_df = pd.DataFrame(encoded_features, columns=encoder.get_feature_names_out(['Month', 'VisitorType']))
+        data = pd.concat([data.drop(['Month', 'VisitorType'], axis=1), encoded_df], axis=1)
 
-    # Отображение результатов на веб-странице и передача данных
-    return render_template('indexlearning.html', dataset_shape=dataset_shape, dataset_head=dataset_head,
-                           dataset_description=dataset_description, class_distribution=class_distribution,
-                           revenue_distribution=revenue_distribution)
+        # Создание матрицы признаков X и вектора целей y
+        X = data.drop('Revenue', axis=1)
+        y = data['Revenue']
+
+        # Разделение данных на обучающий и тестовый наборы
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        
+        # Обучение модели логистической регрессии
+        model = LogisticRegression(random_state=42)  # Изменили модель
+        model.fit(X_train, y_train)
+
+        # Прогнозирование на тестовом наборе
+        y_pred = model.predict(X_test)
+
+        # Оценка производительности модели
+        accuracy = accuracy_score(y_test, y_pred)
+    except Exception as e:
+        # В случае возникновения ошибки выводим сообщение в консоль Flask
+        print(f"An error occurred: {str(e)}")
+      
+        # Устанавливаем значение accuracy в None, чтобы передать его в шаблон
+        accuracy = None
+    
+        # Анализ датасета
+        dataset_shape = data.shape
+        dataset_head = data.head()
+        dataset_description = data.describe()
+        class_distribution = data['Revenue'].value_counts()
+        revenue_distribution = data['Revenue'].value_counts()
+
+        # Одномерные графики
+        # Пример одномерной визуализации: гистограмма по атрибуту 'BounceRates'
+        hist_data = go.Histogram(x=data['BounceRates'], name='Bounce Rates')
+        hist_layout = go.Layout(title='Гистограмма Bounce Rates')
+        hist_fig = go.Figure(data=[hist_data], layout=hist_layout)
+        hist_plot_div = plot(hist_fig, output_type='div')
+
+        # Многомерные графики
+        # Пример многомерной визуализации: scatter plot по атрибутам 'BounceRates' и 'ExitRates'
+        scatter_data = go.Scatter(x=data['BounceRates'], y=data['ExitRates'], mode='markers', name='Bounce Rates vs Exit Rates')
+        scatter_layout = go.Layout(title='Scatter Plot: Bounce Rates vs. Exit Rates', xaxis=dict(title='Bounce Rates'), yaxis=dict(title='Exit Rates'))
+        scatter_fig = go.Figure(data=[scatter_data], layout=scatter_layout)
+        scatter_plot_div = plot(scatter_fig, output_type='div')
+
+        # Отображение результатов на веб-странице и передача данных
+        return render_template('indexlearning.html', accuracy=accuracy,
+                            dataset_shape=dataset_shape, dataset_head=dataset_head,
+                            dataset_description=dataset_description, class_distribution=class_distribution,
+                            revenue_distribution=revenue_distribution, hist_plot_div=hist_plot_div,
+                            scatter_plot_div=scatter_plot_div)
+
 
 @app.route('/indexmonitoring')
 def indexmonitoring():
