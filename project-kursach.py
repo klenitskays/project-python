@@ -1,28 +1,15 @@
-from flask import Flask, render_template, url_for, redirect
+from flask import Flask, render_template
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 from plotly.offline import plot
-import plotly.express as px
-from sklearn.model_selection import train_test_split, cross_val_score, StratifiedKFold
+from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
-from sklearn.preprocessing import OneHotEncoder
-from flask import Flask, render_template
-import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split, cross_val_score, StratifiedKFold
-from sklearn.linear_model import LogisticRegression
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.naive_bayes import GaussianNB
-from sklearn.svm import SVC
-from sklearn.preprocessing import OneHotEncoder
 
 app = Flask(__name__)
 
@@ -36,12 +23,6 @@ def indexlearning():
         # Загрузка данных
         data = pd.read_csv('online_shoppers_intention.csv')
 
-        # Вывод информации о данных
-        print("Data information:")
-        print(data.info())
-        print("\nData description:")
-        print(data.describe())
-
         # Анализ датасета
         dataset_shape = data.shape
         dataset_head = data.head()
@@ -49,44 +30,60 @@ def indexlearning():
         class_distribution = data['Revenue'].value_counts()
         revenue_distribution = data['Revenue'].value_counts()
 
-        # Одномерные графики
-        # Пример одномерной визуализации: гистограмма по атрибуту 'BounceRates'
-        hist_data = go.Histogram(x=data['BounceRates'], name='Bounce Rates')
-        hist_layout = go.Layout(title='Гистограмма Bounce Rates')
-        hist_fig = go.Figure(data=[hist_data], layout=hist_layout)
-        hist_plot_div = plot(hist_fig, output_type='div')
-
-        # Многомерные графики
-        # Пример многомерной визуализации: scatter plot по атрибутам 'BounceRates' и 'ExitRates'
-        scatter_data = go.Scatter(x=data['BounceRates'], y=data['ExitRates'], mode='markers', name='Bounce Rates vs Exit Rates')
-        scatter_layout = go.Layout(title='Scatter Plot: Bounce Rates vs. Exit Rates', xaxis=dict(title='Bounce Rates'), yaxis=dict(title='Exit Rates'))
-        scatter_fig = go.Figure(data=[scatter_data], layout=scatter_layout)
-        scatter_plot_div = plot(scatter_fig, output_type='div')
-
-        # Подготовка данных для модели машинного обучения
+        # Подготовка данных для моделей машинного обучения
         X = data[['BounceRates', 'ExitRates']]  # Выбираем признаки для обучения
         y = data['Revenue']  # Целевая переменная
 
         # Разделение данных на обучающий и тестовый наборы
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-        # Обучение модели логистической регрессии
+        # Обучение и оценка модели логистической регрессии
         lr_model = LogisticRegression(solver='liblinear', multi_class='ovr')
         lr_model.fit(X_train, y_train)
+        lr_train_accuracy = lr_model.score(X_train, y_train)
+        lr_test_accuracy = lr_model.score(X_test, y_test)
 
-        # Оценка точности модели на обучающем наборе
-        train_accuracy = lr_model.score(X_train, y_train)
+        # Обучение и оценка модели линейного дискриминантного анализа (LDA)
+        lda_model = LinearDiscriminantAnalysis()
+        lda_model.fit(X_train, y_train)
+        lda_train_accuracy = lda_model.score(X_train, y_train)
+        lda_test_accuracy = lda_model.score(X_test, y_test)
 
-        # Оценка точности модели на тестовом наборе
-        test_accuracy = lr_model.score(X_test, y_test)
+        # Обучение и оценка модели k-ближайших соседей (KNN)
+        knn_model = KNeighborsClassifier()
+        knn_model.fit(X_train, y_train)
+        knn_train_accuracy = knn_model.score(X_train, y_train)
+        knn_test_accuracy = knn_model.score(X_test, y_test)
 
-        # Возвращаем результаты модели и визуализацию на веб-страницу
+        # Обучение и оценка модели классификации и регрессии с помощью деревьев (CART)
+        cart_model = DecisionTreeClassifier()
+        cart_model.fit(X_train, y_train)
+        cart_train_accuracy = cart_model.score(X_train, y_train)
+        cart_test_accuracy = cart_model.score(X_test, y_test)
+
+        # Обучение и оценка модели наивного байесовского классификатора (NB)
+        nb_model = GaussianNB()
+        nb_model.fit(X_train, y_train)
+        nb_train_accuracy = nb_model.score(X_train, y_train)
+        nb_test_accuracy = nb_model.score(X_test, y_test)
+
+        # Обучение и оценка модели метода опорных векторов (SVM)
+        svm_model = SVC()
+        svm_model.fit(X_train, y_train)
+        svm_train_accuracy = svm_model.score(X_train, y_train)
+        svm_test_accuracy = svm_model.score(X_test, y_test)
+
+        # Возвращаем результаты моделей на веб-страницу
         return render_template('indexlearning.html',
                                 dataset_shape=dataset_shape, dataset_head=dataset_head,
                                 dataset_description=dataset_description, class_distribution=class_distribution,
-                                revenue_distribution=revenue_distribution, hist_plot_div=hist_plot_div,
-                                scatter_plot_div=scatter_plot_div, train_accuracy=train_accuracy,
-                                test_accuracy=test_accuracy)
+                                revenue_distribution=revenue_distribution,
+                                lr_train_accuracy=lr_train_accuracy, lr_test_accuracy=lr_test_accuracy,
+                                lda_train_accuracy=lda_train_accuracy, lda_test_accuracy=lda_test_accuracy,
+                                knn_train_accuracy=knn_train_accuracy, knn_test_accuracy=knn_test_accuracy,
+                                cart_train_accuracy=cart_train_accuracy, cart_test_accuracy=cart_test_accuracy,
+                                nb_train_accuracy=nb_train_accuracy, nb_test_accuracy=nb_test_accuracy,
+                                svm_train_accuracy=svm_train_accuracy, svm_test_accuracy=svm_test_accuracy)
     except Exception as e:
         print(f"An error occurred: {str(e)}")
         return "An error occurred. Please check the logs."
