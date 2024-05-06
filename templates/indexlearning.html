@@ -72,6 +72,13 @@
                             {{ scatter_plot_div | safe }}
                         </div>
                     </div>
+
+                    <!-- Результаты модели машинного обучения -->
+                    <div class="model-results">
+                        <h2 class="section-title">Результаты модели логистической регрессии</h2>
+                        <p>Точность на обучающем наборе: {{ train_accuracy }}</p>
+                        <p>Точность на тестовом наборе: {{ test_accuracy }}</p>
+                    </div>
                 </p>
             </div>
         </div>

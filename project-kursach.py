@@ -32,6 +32,7 @@ def indexglavn():
 
 @app.route('/indexlearning')
 def indexlearning():
+    try:
         # Загрузка данных
         data = pd.read_csv('online_shoppers_intention.csv')
 
@@ -62,12 +63,33 @@ def indexlearning():
         scatter_fig = go.Figure(data=[scatter_data], layout=scatter_layout)
         scatter_plot_div = plot(scatter_fig, output_type='div')
 
-        # Отображение результатов на веб-странице и передача данных
+        # Подготовка данных для модели машинного обучения
+        X = data[['BounceRates', 'ExitRates']]  # Выбираем признаки для обучения
+        y = data['Revenue']  # Целевая переменная
+
+        # Разделение данных на обучающий и тестовый наборы
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+        # Обучение модели логистической регрессии
+        lr_model = LogisticRegression(solver='liblinear', multi_class='ovr')
+        lr_model.fit(X_train, y_train)
+
+        # Оценка точности модели на обучающем наборе
+        train_accuracy = lr_model.score(X_train, y_train)
+
+        # Оценка точности модели на тестовом наборе
+        test_accuracy = lr_model.score(X_test, y_test)
+
+        # Возвращаем результаты модели и визуализацию на веб-страницу
         return render_template('indexlearning.html',
-                            dataset_shape=dataset_shape, dataset_head=dataset_head,
-                            dataset_description=dataset_description, class_distribution=class_distribution,
-                            revenue_distribution=revenue_distribution, hist_plot_div=hist_plot_div,
-                            scatter_plot_div=scatter_plot_div)
+                                dataset_shape=dataset_shape, dataset_head=dataset_head,
+                                dataset_description=dataset_description, class_distribution=class_distribution,
+                                revenue_distribution=revenue_distribution, hist_plot_div=hist_plot_div,
+                                scatter_plot_div=scatter_plot_div, train_accuracy=train_accuracy,
+                                test_accuracy=test_accuracy)
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+        return "An error occurred. Please check the logs."
 @app.route('/indexmonitoring')
 def indexmonitoring():
     # Загрузка данных
