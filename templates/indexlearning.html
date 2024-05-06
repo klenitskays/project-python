@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Графики</title>
-
-
-
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    <body>
+</head>
+<body>
     <!-- Header -->
     <section id="header">
         <div class="header containerhead">
@@ -45,43 +43,41 @@
     <section id="hero">
         <div class="hero container">
             <div class="chart-container">
-                
-        <h2 class="section-title">Размерность датасета: {{ dataset_shape }}<span>.</span></h2>
-<p>
-    <h2 class="section-title">Просмотр среза данных</h2>
-    <pre>{{ dataset_head }}</pre>
-    <h2 class="section-title">Статистическая сводка атрибутов<span>.</span></h2>
-    <pre>{{ dataset_description }}</pre>
-    <h2 class="section-title">Разбивка данных по атрибуту класса<span>.</span></h2>
-    <p>{{ class_distribution }}</p>
+                <h2 class="section-title">Размерность датасета: {{ dataset_shape }}<span>.</span></h2>
+                <p>
+                    <h2 class="section-title">Просмотр среза данных</h2>
+                    <pre>{{ dataset_head }}</pre>
+                    <h2 class="section-title">Статистическая сводка атрибутов<span>.</span></h2>
+                    <pre>{{ dataset_description }}</pre>
+                    <h2 class="section-title">Разбивка данных по атрибуту класса<span>.</span></h2>
+                    <p>{{ class_distribution }}</p>
 
-    <h2 class="section-title">Распределение классов</h2>
-    <pre>{{ class_distribution }}</pre>
+                    <h2 class="section-title">Распределение классов</h2>
+                    <pre>{{ class_distribution }}</pre>
 
-    <h2 class="section-title">Распределение по атрибуту Revenue</h2>
-    <pre>{{ revenue_distribution }}</pre>
+                    <h2 class="section-title">Распределение по атрибуту Revenue</h2>
+                    <pre>{{ revenue_distribution }}</pre>
 
-        <!-- Визуализации данных -->
-        <div class="chart-container">
-            <!-- Гистограмма -->
-            <div class="chart">
-                <h2 class="section-title">Гистограмма Bounce Rates</h2>
-                {{ hist_plot_div | safe }}
+                    <!-- Визуализации данных -->
+                    <div class="chart-container">
+                        <!-- Гистограмма -->
+                        <div class="chart">
+                            <h2 class="section-title">Гистограмма Bounce Rates</h2>
+                            {{ hist_plot_div | safe }}
+                        </div>
+
+                        <!-- Точечная диаграмма -->
+                        <div class="chart">
+                            <h2 class="section-title">Scatter Plot: Bounce Rates vs. Exit Rates</h2>
+                            {{ scatter_plot_div | safe }}
+                        </div>
+                    </div>
+                </p>
             </div>
-
-            <!-- Точечная диаграмма -->
-            <div class="chart">
-                <h2 class="section-title">Scatter Plot: Bounce Rates vs. Exit Rates</h2>
-                {{ scatter_plot_div | safe }}
-            </div>
-            <h1>Оценка алгоритмов</h1>
-            <p>Точность модели: {{ accuracy }}</p>
-    </div>
-</p>
-<!-- <a href="#" class="cta">Learn More</a>  -->
- </div>
-
- <!-- End hero section -->
+        </div>
+    </section>
+    <!-- End hero section -->
+    
     <!-- Footer -->
     <footer id="footer">
         <div class="footer container">
