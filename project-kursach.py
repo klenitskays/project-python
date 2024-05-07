@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import pandas as pd
 import numpy as np
+import plotly.express as px
 import plotly.graph_objects as go
 from plotly.offline import plot
 from sklearn.model_selection import train_test_split
