@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
@@ -10,8 +10,57 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
+import matplotlib.pyplot as plt
+import io
+import base64
 
 app = Flask(__name__)
+
+# Загрузка данных
+data = pd.read_csv('online_shoppers_intention.csv')
+
+# Подготовка данных для моделей машинного обучения
+X = data[['BounceRates', 'ExitRates']]  # Выбираем признаки для обучения
+y = data['Revenue']  # Целевая переменная
+
+# Разделение данных на обучающий и тестовый наборы
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Обучение моделей машинного обучения
+lr_model = LogisticRegression(solver='liblinear', multi_class='ovr').fit(X_train, y_train)
+lda_model = LinearDiscriminantAnalysis().fit(X_train, y_train)
+knn_model = KNeighborsClassifier().fit(X_train, y_train)
+cart_model = DecisionTreeClassifier().fit(X_train, y_train)
+nb_model = GaussianNB().fit(X_train, y_train)
+svm_model = SVC().fit(X_train, y_train)
+
+def generate_prediction_plot(model, bounce_rate, exit_rate):
+    # Создаем прогноз
+    prediction = model.predict([[bounce_rate, exit_rate]])
+
+    # Строим график прогнозирования
+    plt.figure(figsize=(8, 6))
+    plt.scatter(bounce_rate, exit_rate, c='blue', label='Input Data')
+    plt.title('Purchase Prediction')
+    plt.xlabel('Bounce Rate')
+    plt.ylabel('Exit Rate')
+    plt.grid(True)
+
+    # Подписываем прогноз
+    if prediction[0] == 1:
+        plt.text(bounce_rate, exit_rate, 'Purchase', color='red', fontsize=12, ha='center', va='bottom')
+    else:
+        plt.text(bounce_rate, exit_rate, 'No Purchase', color='red', fontsize=12, ha='center', va='bottom')
+
+    # Конвертируем график в формат PNG
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    plt.close()
+
+    # Кодируем изображение в base64 для вставки в HTML
+    encoded_img = base64.b64encode(buf.read()).decode('utf-8')
+    return f'data:image/png;base64,{encoded_img}'
 
 @app.route('/')
 def indexglavn():
@@ -22,7 +71,6 @@ def indexlearning():
     try:
         # Загрузка данных
         data = pd.read_csv('online_shoppers_intention.csv')
-
         # Анализ датасета
         dataset_shape = data.shape
         dataset_head = data.head()
@@ -30,50 +78,21 @@ def indexlearning():
         class_distribution = data['Revenue'].value_counts()
         revenue_distribution = data['Revenue'].value_counts()
 
-        # Подготовка данных для моделей машинного обучения
-        X = data[['BounceRates', 'ExitRates']]  # Выбираем признаки для обучения
-        y = data['Revenue']  # Целевая переменная
-
-        # Разделение данных на обучающий и тестовый наборы
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-        # Обучение и оценка модели логистической регрессии
-        lr_model = LogisticRegression(solver='liblinear', multi_class='ovr')
-        lr_model.fit(X_train, y_train)
+        # Оценка моделей машинного обучения
         lr_train_accuracy = lr_model.score(X_train, y_train)
         lr_test_accuracy = lr_model.score(X_test, y_test)
-
-        # Обучение и оценка модели линейного дискриминантного анализа (LDA)
-        lda_model = LinearDiscriminantAnalysis()
-        lda_model.fit(X_train, y_train)
         lda_train_accuracy = lda_model.score(X_train, y_train)
         lda_test_accuracy = lda_model.score(X_test, y_test)
-
-        # Обучение и оценка модели k-ближайших соседей (KNN)
-        knn_model = KNeighborsClassifier()
-        knn_model.fit(X_train, y_train)
         knn_train_accuracy = knn_model.score(X_train, y_train)
         knn_test_accuracy = knn_model.score(X_test, y_test)
-
-        # Обучение и оценка модели классификации и регрессии с помощью деревьев (CART)
-        cart_model = DecisionTreeClassifier()
-        cart_model.fit(X_train, y_train)
         cart_train_accuracy = cart_model.score(X_train, y_train)
         cart_test_accuracy = cart_model.score(X_test, y_test)
-
-        # Обучение и оценка модели наивного байесовского классификатора (NB)
-        nb_model = GaussianNB()
-        nb_model.fit(X_train, y_train)
         nb_train_accuracy = nb_model.score(X_train, y_train)
         nb_test_accuracy = nb_model.score(X_test, y_test)
-
-        # Обучение и оценка модели метода опорных векторов (SVM)
-        svm_model = SVC()
-        svm_model.fit(X_train, y_train)
         svm_train_accuracy = svm_model.score(X_train, y_train)
         svm_test_accuracy = svm_model.score(X_test, y_test)
 
-        # Возвращаем результаты моделей на веб-страницу
+        # Возвращаем результаты на веб-страницу
         return render_template('indexlearning.html',
                                 dataset_shape=dataset_shape, dataset_head=dataset_head,
                                 dataset_description=dataset_description, class_distribution=class_distribution,
@@ -84,9 +103,11 @@ def indexlearning():
                                 cart_train_accuracy=cart_train_accuracy, cart_test_accuracy=cart_test_accuracy,
                                 nb_train_accuracy=nb_train_accuracy, nb_test_accuracy=nb_test_accuracy,
                                 svm_train_accuracy=svm_train_accuracy, svm_test_accuracy=svm_test_accuracy)
+    
     except Exception as e:
         print(f"An error occurred: {str(e)}")
         return "An error occurred. Please check the logs."
+
 @app.route('/indexmonitoring')
 def indexmonitoring():
     # Загрузка данных
@@ -114,8 +135,6 @@ def indexmonitoring():
 
     # Отображение результатов на веб-странице и передача данных
     return render_template('indexmonitoring.html', bar_plot_div=bar_plot_div, revenue_distribution=revenue_distribution)
-
-
 
 @app.route('/index')
 def index():
@@ -191,6 +210,27 @@ def index():
     return render_template('index.html', bar_plot_div=bar_plot_div, pie_plot_div=pie_plot_div,
                            line_plot_div=line_plot_div, scatter_plot_div=scatter_plot_div,
                            pie_plot_div_revenue=pie_plot_div_revenue)
+
+@app.route('/indexprediction', methods=['GET', 'POST'])
+def indexprediction():
+    if request.method == 'POST':
+        try:
+            bounce_rate = float(request.form['bounce_rate'].replace(',', '.'))
+            exit_rate = float(request.form['exit_rate'].replace(',', '.'))
+            
+            # Создаем прогноз
+            prediction_lda = lda_model.predict([[bounce_rate, exit_rate]])
+            result_lda = 'Покупатель совершит покупку' if prediction_lda[0] == 1 else 'Покупатель не совершит покупку'
+            
+            # Генерируем график прогнозирования
+            prediction_plot = generate_prediction_plot(lda_model, bounce_rate, exit_rate)
+
+            return render_template('prediction.html', result_lda=result_lda, prediction_plot=prediction_plot)
+        except Exception as e:
+            print(f"An error occurred: {str(e)}")
+            return "An error occurred. Please check the logs."
+    else:
+        return render_template('indexprediction.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
