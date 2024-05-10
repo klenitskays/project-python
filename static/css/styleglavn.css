@@ -324,6 +324,9 @@ p {
 	color: white;
 	text-align: left;
 }
+.service-item:hover {
+	cursor: pointer;
+  }
 /* End Services Section */
 
 /* Projects section */

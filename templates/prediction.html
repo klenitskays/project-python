@@ -4,12 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prediction Result</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
 </head>
 <body>
-    <h1>Prediction Result</h1>
-    <h2>Linear Discriminant Analysis Model:</h2>
+        <!-- Header -->
+        <section id="header">
+            <div class="header containerhead">
+                <div class="nav-bar">
+                    <div class="brand">
+                        <a href="#hero">
+                            <h1><span>T</span>rand <span>M</span>aster</h1>
+                        </a>
+                   </div>
+                    <div class="nav-list">
+                        <div class="hamburger">
+                            <div class="bar"></div>
+                        </div>
+                        <ul>
+                            <li><a href="#hero" data-after="Home">на главную страницу</a></li>
+                            <li><a href="#services" data-after="Service">О чем наш проект</a></li>
+                            <li><a href="#projects" data-after="Projects">Анализ данных</a></li>
+                            <li><a href="#about" data-after="About">О создателях</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="hero">
+            <div class="hero container">
+    <h1>Результат прогнозирования</h1>
+    <h2>Модель линейного дискриминантного анализа:</h2>
     <p>{{ result_lda }}</p>
-
+    </div>
+</section>
     <img src="{{ prediction_plot }}" alt="Prediction Plot">
 </body>
 </html>

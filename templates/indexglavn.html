@@ -5,6 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styleglavn.css') }}">
+  <script>
+    function redirectToIndex() {
+      window.location.href = "{{ url_for('index') }}";
+    }
+  </script>
 </head>
 
 <body>
@@ -40,8 +45,8 @@
     <div class="hero container">
       <div>
         <h1>Привет, <span></span></h1>
-        <h1>Мы современная <span></span></h1>
-        <h1>компания <span></span></h1>
+        <h1>Мы Trand Master <span></span></h1>
+        <!-- <h1>Master <span></span></h1> -->
         <a href="#projects" type="button" class="cta">Наша аналитика</a>
       </div>
     </div>
@@ -62,38 +67,30 @@
         </p>
       </div>
       <div class="service-bottom">
-        /*исправить*/
         <div class="service-item">
-          <!-- <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div> -->
-          <h2>Мониторинг спроса</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis debitis rerum, magni voluptatem sed
-            architecto placeat beatae tenetur officia quod</p>
-            <a href="{{ url_for('index') }}">Перейти к индексу</a>
-          </div>
-        <div class="service-item">
-          <!-- <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div> -->
-          <h2>Прогнозирование</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis debitis rerum, magni voluptatem sed
-            architecto placeat beatae tenetur officia quod</p>
-            <a href="{{ url_for('indexmonitoring') }}">Перейти к индексу</a>
+        <a href="{{ url_for('index') }}">
+            <h2>Мониторинг спроса</h2>
+            <p>Мониторинг спроса помогает компаниям понять потребности потребителей, оптимизировать производство и логистику, а также увеличить прибыль.</p>
+          
+          
+        </a></div>
+               <div class="service-item">        <a href="{{ url_for('indexlearning') }}">
 
-        </div>
-        <div class="service-item">
           <!-- <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div> -->
           <h2>Машинное обучение</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis debitis rerum, magni voluptatem sed
-            architecto placeat beatae tenetur officia quod</p>
-          <a href="{{ url_for('indexlearning') }}">Перейти к индексу</a>
+          <p>Для достижения наилучших результатов в прогнозировании необходимо выбрать модель машинного обучения. Здесь представлены различные модели машинного обучение и по результат обучения моделей, выбирем лучшую</p>
+          </a>
         </div>
-      </div>
-      <div class="service-item">
+      
+      <div class="service-item">        <a href="{{ url_for('indexprediction') }}">
+
         <!-- <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div> -->
-        <h2>Машинное обучение пример</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis debitis rerum, magni voluptatem sed
-          architecto placeat beatae tenetur officia quod</p>
-        <a href="{{ url_for('indexprediction') }}">Перейти к индексу</a>
+        <h2>Прогнозирование</h2>
+        <p>Построение моделей прогнозирования спроса на основе исторических данных. После проведения исследования и реализации различных можелей обучения, мы выбрали самую подходящую для прогнозирования</p>
+        </a>
       </div>
     </div>
+  </div>
   </section>
   <!-- End Service Section -->
 
@@ -101,7 +98,7 @@
   <section id="projects">
     <div class="projects container">
       <div class="projects-header">
-        <h1 class="section-title">Анализ <span>данных</span></h1>
+        <h1 class="section-title">Подробнее <span>про каждый этап</span></h1>
       </div>
       <div class="all-projects">
         <div class="project-item">
@@ -124,7 +121,8 @@
           <div class="project-info">
             <h1>Прогнозирование</h1>
             <h2>Coding is Love</h2>
-            <p>Мы предоставляем вам прогнозы, которые можно сравнить с фактическими данными о спросе на удобных временных рядах. Теперь вы сможете увидеть, насколько точны наши прогнозы и как они соотносятся с реальными показателями.</p>
+            <p>Мы предоставляем вам прогнозы, которые можно сравнить с фактическими данными о спросе на удобных временных рядах. 
+              Теперь вы сможете увидеть, насколько точны наши прогнозы и как они соотносятся с реальными показателями.                                    </p>
           </div>
           <div class="project-img">
             <!-- <img src="./img/img-1.png" alt="img"> -->
@@ -137,7 +135,7 @@
             <p>Здесь вы найдете все необходимое, чтобы оптимизировать свою логистическую цепочку и увеличить продажи. 
               Мы предоставляем вам 
               важную информацию, которую помогут вам контролировать запасы, улучшить обработку заказов, 
-              выбрать оптимальные маршруты доставки и снизить затраты на логистику.</p>
+              выбрать оптимальные маршруты доставки и снизить затраты на логистику. </p>
           </div>
           <div class="project-img">
             <!-- <img src="./img/img-1.png" alt="img"> -->
@@ -188,7 +186,7 @@
           exercitationem cumque earum omnis ipsum rem accusantium quis, quas quia, accusamus provident suscipit magni!
           Expedita sint ad dolore, commodi labore nihil velit earum ducimus nulla quae nostrum fugit aut, deserunt
           reprehenderit libero enim!</p>
-        <a href="#" class="cta">Download Resume</a>
+        <!-- <a href="#" class="cta">Download Resume</a> -->
       </div>
     </div>
   </section>

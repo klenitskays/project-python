@@ -4,15 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Make Prediction</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
 </head>
 <body>
-    <h1>Make Prediction</h1>
+        <!-- Header -->
+        <section id="header">
+            <div class="header containerhead">
+                <div class="nav-bar">
+                    <div class="brand">
+                        <a href="#hero">
+                            <h1><span>T</span>rand <span>M</span>aster</h1>
+                        </a>
+                   </div>
+                    <div class="nav-list">
+                        <div class="hamburger">
+                            <div class="bar"></div>
+                        </div>
+                        <ul>
+                            <li><a href="#hero" data-after="Home">на главную страницу</a></li>
+                            <li><a href="#services" data-after="Service">О чем наш проект</a></li>
+                            <li><a href="#projects" data-after="Projects">Анализ данных</a></li>
+                            <li><a href="#about" data-after="About">О создателях</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="hero">
+            <div class="hero container">
+    <h1>Сделаем прогноз!</h1>
     <form action="/indexprediction" method="post">
-        <label for="bounce_rate">Enter Bounce Rate:</label><br>
+        <label for="bounce_rate">Введите показатель отказов:</label><br>
         <input type="text" id="bounce_rate" name="bounce_rate"><br>
-        <label for="exit_rate">Enter Exit Rate:</label><br>
+        <label for="exit_rate">Введите коэффицент выхода</label><br>
         <input type="text" id="exit_rate" name="exit_rate"><br><br>
         <input type="submit" value="Submit">
+    </section>
+</hero>
     </form>
 </body>
 </html>
