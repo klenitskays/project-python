@@ -168,7 +168,6 @@ def index():
     pie_layout = go.Layout(
         title='Круговая диаграмма по типу посетителя',
     )
-
     pie_fig = go.Figure(data=[pie_data], layout=pie_layout)
 
     # Преобразование круговой диаграммы в HTML

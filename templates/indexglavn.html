@@ -5,11 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styleglavn.css') }}">
-  <script>
-    function redirectToIndex() {
-      window.location.href = "{{ url_for('index') }}";
-    }
-  </script>
 </head>
 
 <body>
@@ -70,7 +65,7 @@
         <div class="service-item">
         <a href="{{ url_for('index') }}">
             <h2>Мониторинг спроса</h2>
-            <p>Мониторинг спроса помогает компаниям понять потребности потребителей, оптимизировать производство и логистику, а также увеличить прибыль.</p>
+            <p>Мониторинг спроса помогает компаниям понять потребности потребителей, оптимизировать производство и логистику, а также увеличить прибыль. Мы провели аналитику и изобразили в виде диаграмм мониторинг спроса</p>
           
           
         </a></div>
@@ -104,67 +99,47 @@
         <div class="project-item">
           <div class="project-info">
             <h1>Мониторинг спроса</h1>
-            <h2>Coding is Love</h2>
-            <p> Вы получаете статистику спроса, 
-              сегментацию продуктов, демографический анализ, анализ сезонности и маркетинговые метрики. Это помогает вам понять, 
-              какие продукты пользуются большим спросом и какие маркетинговые усилия эффективны.
-              Дашборд предоставляет простую и понятную информацию для принятия решений и улучшения бизнеса.</p>
+            <!-- <h2>Coding is Love</h2> -->
+            <p>Мониторинг спроса является важным инструментом для бизнеса, позволяющим отслеживать и анализировать текущие тенденции и предпочтения потребителей. 
+              Это процесс сбора и оценки данных о покупательском поведении, включая объемы продаж, популярность продуктов, сезонные колебания и другие факторы, влияющие на спрос. 
+              Мониторинг спроса помогает компаниям понять, какие товары и услуги наиболее востребованы, а также реагировать на изменения рынка, принимать оперативные решения
+               и оптимизировать свою стратегию продаж.</p>
 
               <!-- Мы предоставляем вам статистику спроса, которая поможет вам понять предпочтения ваших клиентов. 
               Вы сможете узнать, какие продукты пользуются наибольшим спросом и какие именно аспекты вашего маркетинга эффективны. -->
           </div>
           <div class="project-img">
-            <!-- <img src="./img/img-1.png" alt="img"> -->
-          </div>
+            <img src="img/monitoring.jpg" alt="img">
+                    </div>
         </div>
         <div class="project-item">
           <div class="project-info">
             <h1>Прогнозирование</h1>
-            <h2>Coding is Love</h2>
-            <p>Мы предоставляем вам прогнозы, которые можно сравнить с фактическими данными о спросе на удобных временных рядах. 
-              Теперь вы сможете увидеть, насколько точны наши прогнозы и как они соотносятся с реальными показателями.                                    </p>
+            <!-- <h2>Coding is Love</h2> -->
+            <p>Прогнозирование представляет собой процесс предсказания будущего спроса на основе анализа исторических данных и использования соответствующих моделей и методов. 
+              Прогнозирование спроса позволяет бизнесам планировать свою деятельность заранее, принимать решения по производству, управлению запасами, маркетингу и логистике.
+               Надежные прогнозы спроса позволяют сократить риски связанные с недостатком товаров или переизбытком запасов, а также эффективно планировать маркетинговые кампании и акции.</p>
           </div>
           <div class="project-img">
-            <!-- <img src="./img/img-1.png" alt="img"> -->
+            <img src="project-python-main/templates/img/prognoz.jpg" alt="img">
           </div>
         </div>
         <div class="project-item">
           <div class="project-info">
             <h1>Машинное обучение</h1>
-            <h2>Coding is Love</h2>
-            <p>Здесь вы найдете все необходимое, чтобы оптимизировать свою логистическую цепочку и увеличить продажи. 
-              Мы предоставляем вам 
-              важную информацию, которую помогут вам контролировать запасы, улучшить обработку заказов, 
-              выбрать оптимальные маршруты доставки и снизить затраты на логистику. </p>
+            <!-- <h2>Coding is Love</h2> -->
+            <p>В контексте мониторинга спроса и прогнозирования, машинное обучение играет важную роль. 
+              Машинное обучение – это методология искусственного интеллекта, которая позволяет компьютерам автоматически изучать и анализировать данные, 
+              обнаруживать скрытые паттерны и делать предсказания на основе этих данных. В прогнозировании спроса машинное обучение может использоваться для
+               создания моделей, которые учитывают множество факторов, включая сезонность, тенденции, маркетинговые активности и другие переменные, 
+               влияющие на спрос.
+               Это позволяет предсказывать будущий спрос с высокой точностью и обеспечивать более эффективное планирование и управление бизнесом. </p>
           </div>
           <div class="project-img">
-            <!-- <img src="./img/img-1.png" alt="img"> -->
+            <img src="./img/education.png" alt="img">
           </div>
         </div>
-        <!-- <div class="project-item">
-          <div class="project-info">
-            <h1>Project 4</h1>
-            <h2>Coding is Love</h2>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad, iusto cupiditate voluptatum impedit unde
-              rem ipsa distinctio illum quae mollitia ut, accusantium eius odio ducimus illo neque atque libero non sunt
-              harum? Ipsum repellat animi, fugit architecto voluptatum odit et!</p>
-          </div>
-          <div class="project-img">
-            <img src="./img/img-1.png" alt="img">
-          </div>
-        </div> -->
-        <!-- <div class="project-item">
-          <div class="project-info">
-            <h1>Project 5</h1>
-            <h2>Coding is Love</h2>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad, iusto cupiditate voluptatum impedit unde
-              rem ipsa distinctio illum quae mollitia ut, accusantium eius odio ducimus illo neque atque libero non sunt
-              harum? Ipsum repellat animi, fugit architecto voluptatum odit et!</p>
-          </div>
-          <div class="project-img">
-            <img src="./img/img-1.png" alt="img">
-          </div>
-        </div> -->
+       
       </div>
     </div>
   </section>
@@ -181,11 +156,12 @@
       <div class="col-right">
         <h1 class="section-title">О <span>создателях</span></h1>
         <h2>Студенты ММФ</h2>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Asperiores, velit alias eius non illum beatae atque
-          repellat ratione qui veritatis repudiandae adipisci maiores. At inventore necessitatibus deserunt
-          exercitationem cumque earum omnis ipsum rem accusantium quis, quas quia, accusamus provident suscipit magni!
-          Expedita sint ad dolore, commodi labore nihil velit earum ducimus nulla quae nostrum fugit aut, deserunt
-          reprehenderit libero enim!</p>
+        <p>Мы - студенты механико-математического факультета, и в рамках нашей курсовой работы мы решили реализовать прогнозирование с 
+          использованием машинного обучения. Мы выбрали эту тему, так как нам было интересно применить теоретические знания,
+           полученные во время обучения, на практике в реальном бизнес-контексте. Наша цель была не просто разработать прогнозную модель,
+            но и дать рекомендации по использованию этих прогнозов для оптимизации бизнес-процессов и принятия стратегических решений. 
+            Мы хотели продемонстрировать, что машинное обучение может быть полезным инструментом для предприятий в различных отраслях,
+            помогая им адаптироваться к изменяющимся рыночным условиям и повышать свою эффективность.</p>
         <!-- <a href="#" class="cta">Download Resume</a> -->
       </div>
     </div>
@@ -250,7 +226,7 @@
      
   </section>
   <!-- End Footer -->
-  <!-- <script src="./app.js"></script> -->
+  <script src="./app.js"></script>
 </body>
 
 </html>

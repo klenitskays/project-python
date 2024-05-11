@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Графики</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stylelearning.css') }}">
 </head>
 <body>
     <!-- Header -->
@@ -42,70 +42,78 @@
     <!-- Hero Section -->
     <section id="hero">
         <div class="hero container">
-            <div class="chart-container">
-                <h2 class="section-title">Размерность датасета: {{ dataset_shape }}<span>.</span></h2>
-                <p>
-                    <h2 class="section-title">Просмотр среза данных</h2>
-                    <pre>{{ dataset_head }}</pre>
-                    <h2 class="section-title">Статистическая сводка атрибутов<span>.</span></h2>
+                        <div class="chart-container">
+                <h2 class="section-title">Размерность датасета: {{ dataset_shape }}<span></span></h2>
+                <!-- <p>     -->
+                <h3 class="section-title">Просмотр среза данных</h3>
+                <pre>{{ dataset_head }}</pre>
+                         </div>
+      
+                        <div class="chart-container">
+                    <h3 class="section-title">Статистическая сводка атрибутов<span>.</span></h2>
                     <pre>{{ dataset_description }}</pre>
-                    <h2 class="section-title">Разбивка данных по атрибуту класса<span>.</span></h2>
-                    <p>{{ class_distribution }}</p>
-
-                    <h2 class="section-title">Распределение классов</h2>
-                    <pre>{{ class_distribution }}</pre>
-
-                    <h2 class="section-title">Распределение по атрибуту Revenue</h2>
-                    <pre>{{ revenue_distribution }}</pre>
-
+                        </div>
+                        <div class="chart-container">
+                    <h3 class="section-title">Разбивка данных по атрибуту класса<span>.</span></h2>
+                    <pre class="section-title">{{ class_distribution }}</pre>
+                        </div>
+                         <div class="chart-container">
+                    <h3 class="section-title">Распределение классов</h2>
+                    <pre class="section-title">{{ class_distribution }}</pre>
+                        </div> 
+                         <div class="chart-container">
+                    <h3 class="section-title">Распределение по атрибуту Revenue</h2>
+                    <pre class="section-title">{{ revenue_distribution }}</pre>
+                        </div>
+                     <div class="chart-container">
                     <!-- Визуализации данных -->
-                    <div class="chart-container">
                         <!-- Гистограмма -->
                         <div class="chart">
                             <h2 class="section-title">Гистограмма Bounce Rates</h2>
                             {{ hist_plot_div | safe }}
-                        </div>
-
+                        
                         <!-- Точечная диаграмма -->
-                        <div class="chart">
+                     
+                       
                             <h2 class="section-title">Scatter Plot: Bounce Rates vs. Exit Rates</h2>
                             {{ scatter_plot_div | safe }}
-                        </div>
-                    </div>
-
+                            </div>
+                        
+</div>
+            <div class="chart-container">
                     <!-- Результаты модели машинного обучения -->
                             <!-- Результаты моделей машинного обучения -->
                         <div class="model-results">
                             <h2 class="section-title">Результаты моделей машинного обучения</h2>
 
-                            <h3>Логистическая регрессия</h3>
-                            <p>Точность на обучающем наборе: {{ lr_train_accuracy }}</p>
-                            <p>Точность на тестовом наборе: {{ lr_test_accuracy }}</p>
+                            <h3 class="section-title">Логистическая регрессия</h3>
+                            <pre class="section-title">Точность на обучающем наборе: {{ lr_train_accuracy }}</pre>
+                            <pre class="section-title">Точность на тестовом наборе: {{ lr_test_accuracy }}</pre>
 
-                            <h3>Линейный дискриминантный анализ (LDA)</h3>
-                            <p>Точность на обучающем наборе: {{ lda_train_accuracy }}</p>
-                            <p>Точность на тестовом наборе: {{ lda_test_accuracy }}</p>
+                            <h3 class="section-title">Линейный дискриминантный анализ (LDA)</h3>
+                            <pre class="section-title">Точность на обучающем наборе: {{ lda_train_accuracy }}</pre>
+                            <pre class="section-title">Точность на тестовом наборе: {{ lda_test_accuracy }}</pre>
 
-                            <h3>K-ближайших соседей (KNN)</h3>
-                            <p>Точность на обучающем наборе: {{ knn_train_accuracy }}</p>
-                            <p>Точность на тестовом наборе: {{ knn_test_accuracy }}</p>
+                            <h3 class="section-title">K-ближайших соседей (KNN)</h3>
+                            <pre class="section-title">Точность на обучающем наборе: {{ knn_train_accuracy }}</pre>
+                            <pre class="section-title">Точность на тестовом наборе: {{ knn_test_accuracy }}</pre>
 
-                            <h3>Классификация и регрессия с помощью деревьев (CART)</h3>
-                            <p>Точность на обучающем наборе: {{ cart_train_accuracy }}</p>
-                            <p>Точность на тестовом наборе: {{ cart_test_accuracy }}</p>
+                            <h3 class="section-title">Классификация и регрессия с помощью деревьев (CART)</h3>
+                            <pre class="section-title">Точность на обучающем наборе: {{ cart_train_accuracy }}</pre>
+                            <pre class="section-title">Точность на тестовом наборе: {{ cart_test_accuracy }}</pre>
 
-                            <h3>Наивный байесовский классификатор (NB)</h3>
-                            <p>Точность на обучающем наборе: {{ nb_train_accuracy }}</p>
-                            <p>Точность на тестовом наборе: {{ nb_test_accuracy }}</p>
+                            <h3 class="section-title">Наивный байесовский классификатор (NB)</h3>
+                            <pre class="section-title">Точность на обучающем наборе: {{ nb_train_accuracy }}</pre>
+                            <pre class="section-title">Точность на тестовом наборе: {{ nb_test_accuracy }}</pre>
 
-                            <h3>Метод опорных векторов (SVM)</h3>
-                            <p>Точность на обучающем наборе: {{ svm_train_accuracy }}</p>
-                            <p>Точность на тестовом наборе: {{ svm_test_accuracy }}</p>
+                            <h3 class="section-title">Метод опорных векторов (SVM)</h3>
+                            <pre class="section-title">Точность на обучающем наборе: {{ svm_train_accuracy }}</pre>
+                            <pre class="section-title">Точность на тестовом наборе: {{ svm_test_accuracy }}</pre>
                         </div>
 
-                </p>
+                <!-- </p> -->
             </div>
-        </div>
+        
     </section>
     <!-- End hero section -->
     

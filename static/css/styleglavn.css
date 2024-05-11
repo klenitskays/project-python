@@ -200,7 +200,7 @@ p {
 
 /* Hero Section */
 #hero {
-	background-image: url(./img/glav.jpg);
+	background-image: url(/templates/img/glavnaya.jpg);
 	background-size: cover;
 	background-position: top center;
 	position: relative;
@@ -278,25 +278,26 @@ p {
 }
 #services .service-bottom {
 	display: flex;
-	align-items: center;
+	align-items: stretch;
 	justify-content: center;
 	flex-wrap: wrap;
 	margin-top: 50px;
 }
 #services .service-item {
-	flex-basis: 80%;
+	flex-basis: 33.33%;
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 	padding: 30px;
 	border-radius: 10px;
 	background-image: url(./img/img-1.png);
 	background-size: cover;
-	margin: 10px 5%;
+	margin: 10px 10px; /* Adjust the value as needed */
 	position: relative;
 	z-index: 1;
 	overflow: hidden;
+	height: 300px; /* Adjust the height as needed */
 }
 #services .service-item::after {
 	content: '';
@@ -323,6 +324,7 @@ p {
 #services .service-item p {
 	color: white;
 	text-align: left;
+	margin-top: 20px;
 }
 .service-item:hover {
 	cursor: pointer;

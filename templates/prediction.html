@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prediction Result</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stylelearning.css') }}">
 
 </head>
 <body>
@@ -31,11 +31,16 @@
                 </div>
             </div>
         </section>
+        <section id="names">
+            <div class="names container">
+                <h1 class="section-title"><span>Результат</span>прогнозирования</h1>
+            </div>
+        </section>
+
         <section id="hero">
             <div class="hero container">
-    <h1>Результат прогнозирования</h1>
-    <h2>Модель линейного дискриминантного анализа:</h2>
-    <p>{{ result_lda }}</p>
+    <h3>Модель линейного дискриминантного анализа:</h3>
+    <h2 class="section-title">{{ result_lda }}</h2>
     </div>
 </section>
     <img src="{{ prediction_plot }}" alt="Prediction Plot">
