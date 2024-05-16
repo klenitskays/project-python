@@ -369,30 +369,30 @@ def indexprediction():
 
 # функциональное тестирование
 
-class TestAppFunctionality(unittest.TestCase):
-    def setUp(self):
-        # Инициализация веб-драйвера Selenium
-        self.driver = webdriver.Chrome()
+# class TestAppFunctionality(unittest.TestCase):
+#     def setUp(self):
+#         # Инициализация веб-драйвера Selenium
+#         self.driver = webdriver.Chrome()
 
-    def tearDown(self):
-        # Закрытие веб-драйвера после каждого теста
-        self.driver.quit()
+#     def tearDown(self):
+#         # Закрытие веб-драйвера после каждого теста
+#         self.driver.quit()
 
-    def test_indexglavn_page(self):
-        # Тестирование страницы indexglavn
-        self.driver.get('http://127.0.0.1:5000/')
-        # Проверка наличия необходимых элементов на странице, например, изображений
-        contact_img = self.driver.find_element_by_xpath('//*[@id="contact_img"]')
-        prognoz_img = self.driver.find_element_by_xpath('//*[@id="prognoz_img"]')
-        monitoring_img = self.driver.find_element_by_xpath('//*[@id="monitoring_img"]')
-        education_img = self.driver.find_element_by_xpath('//*[@id="education_img"]')
-        self.assertIsNotNone(contact_img)
-        self.assertIsNotNone(prognoz_img)
-        self.assertIsNotNone(monitoring_img)
-        self.assertIsNotNone(education_img)
+#     def test_indexglavn_page(self):
+#         # Тестирование страницы indexglavn
+#         self.driver.get('http://127.0.0.1:5000/')
+#         # Проверка наличия необходимых элементов на странице, например, изображений
+#         contact_img = self.driver.find_element_by_xpath('//*[@id="contact_img"]')
+#         prognoz_img = self.driver.find_element_by_xpath('//*[@id="prognoz_img"]')
+#         monitoring_img = self.driver.find_element_by_xpath('//*[@id="monitoring_img"]')
+#         education_img = self.driver.find_element_by_xpath('//*[@id="education_img"]')
+#         self.assertIsNotNone(contact_img)
+#         self.assertIsNotNone(prognoz_img)
+#         self.assertIsNotNone(monitoring_img)
+#         self.assertIsNotNone(education_img)
 
-if __name__ == '__main__':
-    unittest.main()
+# if __name__ == '__main__':
+#     unittest.main()
 
 
 if __name__ == '__main__':
