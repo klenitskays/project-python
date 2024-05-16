@@ -251,6 +251,149 @@ def indexprediction():
             return "An error occurred. Please check the logs."
     else:
         return render_template('indexprediction.html')
+    
+
+
+
+# TESTS
+
+# модульные тесты
+# import unittest
+# from your_module import generate_prediction_plot
+# import matplotlib.pyplot as plt
+
+# class TestGeneratePredictionPlot(unittest.TestCase):
+#     def test_generate_prediction_plot(self):
+#         # Создаем модель для тестирования
+#         class TestModel:
+#             def predict(self, data):
+#                 # Здесь мы имитируем прогноз модели
+#                 # В данном случае, всегда возвращаем 1
+#                 return [1]
+
+#         model = TestModel()
+#         bounce_rate = 0.5
+#         exit_rate = 0.4
+
+#         # Вызываем функцию для тестирования
+#         plot_html = generate_prediction_plot(model, bounce_rate, exit_rate)
+
+#         # Проверяем, что возвращенное значение не является пустой строкой
+#         self.assertNotEqual(plot_html, '')
+
+#         # Проверяем, что график был создан
+#         self.assertTrue(isinstance(plt.gcf(), plt.Figure))
+
+# тестирования функций обучения моделей
+
+# class TestModelTraining(unittest.TestCase):
+#     def test_data_loading(self):
+#         # Check if data is loaded correctly
+#         self.assertIsNotNone(X_train)
+#         self.assertIsNotNone(X_test)
+#         self.assertIsNotNone(y_train)
+#         self.assertIsNotNone(y_test)
+
+#     def test_data_splitting(self):
+#         # Check if data is split correctly into training and testing sets
+#         self.assertEqual(X_train.shape[0] + X_test.shape[0], len(X_train) + len(X_test))
+#         self.assertEqual(y_train.shape[0] + y_test.shape[0], len(y_train) + len(y_test))
+
+#     def test_model_training(self):
+#         # Check if all models are trained successfully
+#         self.assertIsNotNone(lr_model)
+#         self.assertIsNotNone(lda_model)
+#         self.assertIsNotNone(knn_model)
+#         self.assertIsNotNone(cart_model)
+#         self.assertIsNotNone(nb_model)
+#         self.assertIsNotNone(svm_model)
+
+#     def test_model_accuracy(self):
+#         # Check if model accuracies are within expected range
+#         lr_train_accuracy = lr_model.score(X_train, y_train)
+#         lr_test_accuracy = lr_model.score(X_test, y_test)
+#         lda_train_accuracy = lda_model.score(X_train, y_train)
+#         lda_test_accuracy = lda_model.score(X_test, y_test)
+#         knn_train_accuracy = knn_model.score(X_train, y_train)
+#         knn_test_accuracy = knn_model.score(X_test, y_test)
+#         cart_train_accuracy = cart_model.score(X_train, y_train)
+#         cart_test_accuracy = cart_model.score(X_test, y_test)
+#         nb_train_accuracy = nb_model.score(X_train, y_train)
+#         nb_test_accuracy = nb_model.score(X_test, y_test)
+#         svm_train_accuracy = svm_model.score(X_train, y_train)
+#         svm_test_accuracy = svm_model.score(X_test, y_test)
+
+#         self.assertTrue(0 <= lr_train_accuracy <= 1)
+#         self.assertTrue(0 <= lr_test_accuracy <= 1)
+#         self.assertTrue(0 <= lda_train_accuracy <= 1)
+#         self.assertTrue(0 <= lda_test_accuracy <= 1)
+#         self.assertTrue(0 <= knn_train_accuracy <= 1)
+#         self.assertTrue(0 <= knn_test_accuracy <= 1)
+#         self.assertTrue(0 <= cart_train_accuracy <= 1)
+#         self.assertTrue(0 <= cart_test_accuracy <= 1)
+#         self.assertTrue(0 <= nb_train_accuracy <= 1)
+#         self.assertTrue(0 <= nb_test_accuracy <= 1)
+#         self.assertTrue(0 <= svm_train_accuracy <= 1)
+#         self.assertTrue(0 <= svm_test_accuracy <= 1)
+
+# Для тестирования взаимодействия между маршрутами
+
+# class TestAppRoutes(unittest.TestCase):
+#     def setUp(self):
+#         app.testing = True
+#         self.app = app.test_client()
+
+#     def test_indexglavn_route(self):
+#         response = self.app.get('/')
+#         self.assertEqual(response.status_code, 200)
+#         # Дополнительные проверки на передачу данных и корректный HTML могут быть добавлены здесь
+
+#     def test_indexlearning_route(self):
+#         response = self.app.get('/indexlearning')
+#         self.assertEqual(response.status_code, 200)
+#         # Дополнительные проверки на передачу данных и корректный HTML могут быть добавлены здесь
+
+#     def test_indexmonitoring_route(self):
+#         response = self.app.get('/indexmonitoring')
+#         self.assertEqual(response.status_code, 200)
+#         # Дополнительные проверки на передачу данных и корректный HTML могут быть добавлены здесь
+
+#     def test_index_route(self):
+#         response = self.app.get('/index')
+#         self.assertEqual(response.status_code, 200)
+#         # Дополнительные проверки на передачу данных и корректный HTML могут быть добавлены здесь
+
+#     def test_indexprediction_route(self):
+#         response = self.app.get('/indexprediction')
+#         self.assertEqual(response.status_code, 200)
+
+# функциональное тестирование
+
+class TestAppFunctionality(unittest.TestCase):
+    def setUp(self):
+        # Инициализация веб-драйвера Selenium
+        self.driver = webdriver.Chrome()
+
+    def tearDown(self):
+        # Закрытие веб-драйвера после каждого теста
+        self.driver.quit()
+
+    def test_indexglavn_page(self):
+        # Тестирование страницы indexglavn
+        self.driver.get('http://127.0.0.1:5000/')
+        # Проверка наличия необходимых элементов на странице, например, изображений
+        contact_img = self.driver.find_element_by_xpath('//*[@id="contact_img"]')
+        prognoz_img = self.driver.find_element_by_xpath('//*[@id="prognoz_img"]')
+        monitoring_img = self.driver.find_element_by_xpath('//*[@id="monitoring_img"]')
+        education_img = self.driver.find_element_by_xpath('//*[@id="education_img"]')
+        self.assertIsNotNone(contact_img)
+        self.assertIsNotNone(prognoz_img)
+        self.assertIsNotNone(monitoring_img)
+        self.assertIsNotNone(education_img)
+
+if __name__ == '__main__':
+    unittest.main()
+
 
 if __name__ == '__main__':
     app.run(debug=True)
