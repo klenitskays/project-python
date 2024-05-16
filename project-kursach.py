@@ -66,6 +66,7 @@ def generate_prediction_plot(model, bounce_rate, exit_rate):
 @app.route('/')
 def indexglavn():
     # Пути к изображениям
+    contact_img_path = 'static/img/contact.png'
     prognoz_img_path = 'static/img/prognoz.jpg'
     monitoring_img_path = 'static/img/monitoring.jpg'
     education_img_path = 'static/img/education.png'
@@ -77,13 +78,13 @@ def indexglavn():
         return f'data:image/png;base64,{encoded_img}'
 
     # Кодирование изображений в base64
-    
+    contact_img = encode_image_to_base64(contact_img_path)
     prognoz_img = encode_image_to_base64(prognoz_img_path)
     monitoring_img = encode_image_to_base64(monitoring_img_path)
     education_img = encode_image_to_base64(education_img_path)
 
     # Передача переменных с закодированными изображениями в шаблон
-    return render_template('indexglavn.html', monitoring_img=monitoring_img, prognoz_img=prognoz_img, education_img=education_img)
+    return render_template('indexglavn.html', monitoring_img=monitoring_img, prognoz_img=prognoz_img, education_img=education_img, contact_img=contact_img)
 
 
 @app.route('/indexlearning')

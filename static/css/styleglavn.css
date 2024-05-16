@@ -412,10 +412,10 @@ p {
 	margin: 0 auto;
 	padding: 100px 20px;
 }
-#about .col-left {
+/* #about .col-left {
 	width: 250px;
 	height: 360px;
-}
+} */
 #about .col-right {
 	width: 100%;
 }
@@ -438,18 +438,14 @@ p {
 	height: 100%;
 	width: 100%;
 	position: relative;
-	border: 10px solid white;
+	border: 10px solid crimson;
 }
-#about .col-left .about-img::after {
+/* #about .col-left .about-img::after {
 	content: '';
 	position: absolute;
-	left: -33px;
-	top: 19px;
-	height: 98%;
-	width: 98%;
-	border: 7px solid crimson;
+	border: 10px solid crimson;
 	z-index: -1;
-}
+} */
 /* End About Section */
 
 /* contact Section */
